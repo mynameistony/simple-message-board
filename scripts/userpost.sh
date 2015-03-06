@@ -9,7 +9,7 @@ echo "<div class=\"timestamp\">$TIME</div>" >> board.txt
 echo "<div class=\"username\">$user</div>" >> board.txt
 echo "<div class=\"post-content\">$post</div>" >> board.txt
 echo "</div>" >> board.txt
-echo "<p><b>$user posted: $post on $TIME</b></p>"
+echo "<p id=\"post-response\" class=\"post-response\"><b>$user posted: $post on $TIME</b></p>"
 
 
 

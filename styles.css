@@ -1,0 +1,41 @@
+body{
+	background-color: grey;
+}
+
+
+
+.button{
+	padding: 20px;
+	color: blue;
+	background-color: green;
+}
+.post{
+	width: 50%;
+	background-color: lightgray;
+	padding: 15px;
+}
+
+.post-content{
+	text-align: right;
+}
+
+.timestamp{
+	color: green;
+}
+
+.username{
+	color: blue;
+	text-align: left;
+
+}
+
+.valid-post-response{
+	width: 50%;
+	background-color: green;
+}
+
+.invalid-post-response{
+	width: 50%;
+	background-color: red;
+	
+}
