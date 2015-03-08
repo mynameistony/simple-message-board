@@ -16,13 +16,26 @@
 		echo "<br>";
 	}
 
-	echo "<input type=\"submit\" name=\"send\" value=\"Send to strip\">";
+	echo "<p><input type=\"submit\" name=\"send\" value=\"Send to strip\"></p>";
+	echo "<input type=\"submit\" name=\"rainbow\" value=\"Rainbow\"> ";
+	echo "<input type=\"submit\" name=\"off\" value=\"Off\"> ";
+	echo "<input type=\"submit\" name=\"on\" value=\"White\"> ";
 	echo "</form>";
 
 
+	$toSend = "xxxxxxxxxx";
 
+	if(isset($_POST['off']))
+		$toSend = "oooooooooo";
+	else
+	if(isset($_POST['on']))
+		$toSend = "wwwwwwwwww";
+	else
+	if(isset($_POST['rainbow']))
+		$toSend = "wwrygcbmww";
+	else
 	if(isset($_POST['send'])){
-		$toSend = "xxxxxxxxxx";
+			
 		for($i = 0; $i < 10; $i++){
 			$color = $_POST["LED$i"];
 			$colorCode = substr($color, 0);
@@ -32,6 +45,7 @@
 
 			$toSend[$i] = $colorCode;
 		}
+		
 	}
 	#echo "$toSend";
 	shell_exec("bash scripts/send-strip.sh $toSend");
