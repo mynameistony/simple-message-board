@@ -7,8 +7,8 @@
 
 	echo "<form action=\"led.php\" method=\"post\">";
 	for ($i = 0; $i < 10; $i++){
-		echo "LED #$i: ";
-		echo "<select name=\"LED$i\">";
+		echo "<b id=\"LED$i-label\">LED #$i</b>: ";
+		echo "<select onchange=\"setColor()\" name=\"LED$i\" id=\"LED$i-selector\">";
 		foreach($colors as $color){
 			echo "<option value=\"$color\">$color</option>";
 		}
@@ -25,14 +25,20 @@
 
 	$toSend = "xxxxxxxxxx";
 
-	if(isset($_POST['off']))
+	if(isset($_POST['off'])){
 		$toSend = "oooooooooo";
+		shell_exec("bash scripts/send-strip.sh $toSend");
+	}
 	else
-	if(isset($_POST['on']))
+	if(isset($_POST['on'])){
 		$toSend = "wwwwwwwwww";
+		shell_exec("bash scripts/send-strip.sh $toSend");
+	}
 	else
-	if(isset($_POST['rainbow']))
+	if(isset($_POST['rainbow'])){
 		$toSend = "wwrygcbmww";
+		shell_exec("bash scripts/send-strip.sh $toSend");
+	}
 	else
 	if(isset($_POST['send'])){
 			
@@ -45,10 +51,11 @@
 
 			$toSend[$i] = $colorCode;
 		}
-		
+
+		shell_exec("bash scripts/send-strip.sh $toSend");	
 	}
 	#echo "$toSend";
-	shell_exec("bash scripts/send-strip.sh $toSend");
+	
 ?>
 <br><br>
 <p><div><a class="button" href="LED.html">Find out more!</a></div></p>

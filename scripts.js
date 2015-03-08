@@ -1,3 +1,11 @@
+function setColor(){
+	for (var i = 0; i < 10; i++) {
+		var thisLEDselector = "LED" + i + "-selector";
+		var thisLEDlabel = "LED" + i + "-label";
+		var thisLEDcolor = "color:" + document.getElementById(thisLEDselector).value;
+		document.getElementById(thisLEDlabel).style = thisLEDcolor;
+	}
+}
 
 function validateUsername(){
 	var username = document.getElementById("username").value;
