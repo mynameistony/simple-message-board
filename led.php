@@ -36,3 +36,5 @@
 	#echo "$toSend";
 	shell_exec("bash scripts/send-strip.sh $toSend");
 ?>
+<br><br>
+<p><div><a class="button" href="LED.html">Find out more!</a></div></p>

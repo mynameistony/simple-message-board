@@ -2,7 +2,9 @@ body{
 	background-color: grey;
 }
 
-
+.section-header{
+	background-color: green;
+}
 
 .button{
 	padding: 20px;
