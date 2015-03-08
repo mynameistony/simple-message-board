@@ -1,27 +1,29 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/styles.css">
+<script src="/scripts.js"></script>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<title></title>
 	<meta name="generator" content="LibreOffice 4.2.7.2 (Linux)">
 	<meta name="author" content="Tony Rogers">
 	<meta name="created" content="20150308;0">
 	<meta name="changedby" content="Tony Rogers">
-	<meta name="changed" content="20150308;100738351759825">
+	<meta name="changed" content="20150308;101934543507429">
 	<meta name="changedby" content="Tony Rogers">
-	<script src="/scripts.js"></script>
+	<meta name="changedby" content="Tony Rogers">
 	<style type="text/css">
 	<!--
 		@page { margin: 0.79in }
-		p { margin-bottom: 0.1in; line-height: 120% }
+		p { margin-bottom: 0.1in; color: #000000; line-height: 120% }
 	-->
 	</style>
 </head>
-<body lang="en-US" dir="ltr" style="background: transparent">
+<body>
 <p align="center" style="margin-top: 0.17in; margin-bottom: 0.08in; line-height: 100%; page-break-after: avoid">
 <font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Internet
 Led Strip</b></font></font></p>
-<p>Intro:</p>
+<p class="section-header">Intro:</p>
 <p>This is the write-up for my internet controlled LED strip. The
 final product is an LED strip connected to the Internet, hosting a
 webpage that allows anyone choose the strips current light
@@ -30,13 +32,13 @@ computers from assembly-level bit banging and other low-level
 hardware interaction, to installing and administering Linux systems,
 to creating programs that work together in a variety of languages, as
 well as web development.</p>
-<p>Abstract:</p>
+<p class="section-header">Abstract:</p>
 <p>The Raspberry Pi is connected to the network, and hosting a
 webpage. On the page there is a form that when submitted, causes the
 server to execute a program that sends data about what LEDs to light
 up to the Arduino. The Arduino then interprets the data and tells the
 LED strip what LEDs to light up. Pretty simple right?</p>
-<p>Parts:</p>
+<p class="section-header">Parts:</p>
 <ul>
 	<li><p>1x → Raspberry Pi + SD card (at least 8GB) + power cable</p>
 	<li><p>1x → Arduino (Mega for me, most should work)</p>
@@ -58,7 +60,7 @@ LED strip what LEDs to light up. Pretty simple right?</p>
 	<li><p>1x TV(Also for first boot or if you don't have an SSH client)</p>
 	<li><p>1x Other Computer (To burn ISO to SD)</p>
 </ul>
-<p>What you should know/will learn (Topics Covered):</p>
+<p class="section-header">What you should know/will learn (Topics Covered):</p>
 <ul>
 	<li><p>Programming Languages</p>
 	<ul>
@@ -99,7 +101,7 @@ LED strip what LEDs to light up. Pretty simple right?</p>
 <p align="center">Where to begin...</p>
 <p align="left">To me it seems logical to start with the lowest level
 we're dealing with...hardware.</p>
-<p align="left">Arduino + LED strip: <a href="/addthislink">Schematic</a></p>
+<p class="section-header" align="left">Arduino + LED strip:</p>
 <ul>
 	<li><p align="left">The LED strip's driver chip must receive a
 	specially designed pulse to display colors.</p>
@@ -111,9 +113,20 @@ we're dealing with...hardware.</p>
 	interprets them and sets the strip accordingly.</p>
 	<li><p align="left"><a href="https://github.com/mynameistony/simple-message-board/tree/master/stuff/Arduino">Check
 	the code for more info</a></p>
+	<li><p align="left">Download the Arduino IDE <a href="http://www.arduino.cc/en/Main/Software">from
+	here</a></p>
+	<li><p align="left">Paste the contents 'SerialLEDstrip.ino' into the
+	window</p>
+	<li><p align="left">Click the little towards the top right and
+	select Create New Tab</p>
+	<ul>
+		<li><p align="left">Name it 'stuff.h' and paste in the contents of
+		stuff.h</p>
+	</ul>
+	<li><p align="left">Click upload and hopefully it works :P</p>
 </ul>
 <p align="left">Now for the backbone...</p>
-<p>Raspberry Pi:</p>
+<p class="section-header">Raspberry Pi:</p>
 <ul>
 	<li><p>Burn the ISO/install the OS to the SD</p>
 	<ul>
@@ -169,8 +182,8 @@ we're dealing with...hardware.</p>
 				-I</font>) and you should Apache's default page.</font></p>
 			</ul>
 			<li><p><font face="Liberation Serif, serif">Now download all the
-			files from my repo: <font face="FreeMono, monospace">git clone
-			<a href="https://github.com/mynameistony/InternetLEDStrip.git">https://github.com/mynameistony/InternetLEDStrip.git</a></font></font></p>
+			files from my repo: </font><font face="FreeMono, monospace">git
+			clone <a href="https://github.com/mynameistony/InternetLEDStrip.git">https://github.com/mynameistony/InternetLEDStrip.git</a></font></p>
 			<ul>
 				<li><p><font face="Liberation Serif, serif">This folder contains
 				everything you will need</font></p>
@@ -214,10 +227,15 @@ we're dealing with...hardware.</p>
 				this</a></font></p>
 			</ul>
 			<li><p><font face="Liberation Serif, serif">Now reboot and we
-			should be all set: <font face="FreeMono, monospace">sudo reboot</font></font></p>
+			should be all set: </font><font face="FreeMono, monospace">sudo
+			reboot</font></p>
 		</ul>
 	</ul>
-	<li><p></p>
+	<li><p><font face="Liberation Serif, serif">Now connect the Rpi,
+	Arduino and LED strip as shown <a href="http://tonyrogers.ddns.net/addthislink">here</a></font></p>
 </ul>
+<p><br><br>
+</p>
+<p class="section-header" align="center"><font face="Liberation Serif, serif">That's it! That wasn't so hard, was it?</font></p>
 </body>
 </html>
