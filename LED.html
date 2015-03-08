@@ -1,15 +1,14 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="/styles.css">
-
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
 	<title></title>
 	<meta name="generator" content="LibreOffice 4.2.7.2 (Linux)">
 	<meta name="author" content="Tony Rogers">
 	<meta name="created" content="20150308;0">
 	<meta name="changedby" content="Tony Rogers">
-	<meta name="changed" content="20150308;60037259007259">
+	<meta name="changed" content="20150308;100738351759825">
+	<meta name="changedby" content="Tony Rogers">
 	<script src="/scripts.js"></script>
 	<style type="text/css">
 	<!--
@@ -18,11 +17,11 @@
 	-->
 	</style>
 </head>
-<body>
+<body lang="en-US" dir="ltr" style="background: transparent">
 <p align="center" style="margin-top: 0.17in; margin-bottom: 0.08in; line-height: 100%; page-break-after: avoid">
 <font face="Liberation Sans, sans-serif"><font size="6" style="font-size: 28pt"><b>Internet
 Led Strip</b></font></font></p>
-<p class="section-header">Intro:</p>
+<p>Intro:</p>
 <p>This is the write-up for my internet controlled LED strip. The
 final product is an LED strip connected to the Internet, hosting a
 webpage that allows anyone choose the strips current light
@@ -31,13 +30,13 @@ computers from assembly-level bit banging and other low-level
 hardware interaction, to installing and administering Linux systems,
 to creating programs that work together in a variety of languages, as
 well as web development.</p>
-<p class="section-header">Abstract:</p>
+<p>Abstract:</p>
 <p>The Raspberry Pi is connected to the network, and hosting a
 webpage. On the page there is a form that when submitted, causes the
 server to execute a program that sends data about what LEDs to light
 up to the Arduino. The Arduino then interprets the data and tells the
 LED strip what LEDs to light up. Pretty simple right?</p>
-<p class="section-header">Parts:</p>
+<p>Parts:</p>
 <ul>
 	<li><p>1x → Raspberry Pi + SD card (at least 8GB) + power cable</p>
 	<li><p>1x → Arduino (Mega for me, most should work)</p>
@@ -59,9 +58,9 @@ LED strip what LEDs to light up. Pretty simple right?</p>
 	<li><p>1x TV(Also for first boot or if you don't have an SSH client)</p>
 	<li><p>1x Other Computer (To burn ISO to SD)</p>
 </ul>
-<p class="section-header">What you should know/will learn (Topics Covered):</p>
+<p>What you should know/will learn (Topics Covered):</p>
 <ul>
-	<li><p class="section-header">Programming Languages</p>
+	<li><p>Programming Languages</p>
 	<ul>
 		<li><p>C/C++ → For the Arduino (<i>also noip client I use had to
 		be compiled from source)</i></p>
@@ -76,14 +75,14 @@ LED strip what LEDs to light up. Pretty simple right?</p>
 		<li><p>Bonus (Not neccessary): Javascript/CSS → Make the site
 		look pretty and do cool things</p>
 	</ul>
-	<li><p class="section-header">Other Computer Stuff</p>
+	<li><p>Other Computer Stuff</p>
 	<ul>
-		<li><p class="section-header">Hardware interaction</p>
+		<li><p>Hardware interaction</p>
 		<ul>
 			<li><p>Interfacing with TM1801? LED driver</p>
 			<li><p>Using serial communication</p>
 		</ul>
-		<li><p class="section-header">Software:</p>
+		<li><p>Software:</p>
 		<ul>
 			<li><p>Installing/Configuring a Linux distribution to work for you</p>
 			<li><p>Compiling/building programs from source as well as using
@@ -91,6 +90,7 @@ LED strip what LEDs to light up. Pretty simple right?</p>
 			<li><p>Configuring Apache web server 
 			</p>
 			<li><p>Hexadecimal/Binary</p>
+			<li><p>Basic Git commands</p>
 		</ul>
 	</ul>
 </ul>
@@ -99,7 +99,7 @@ LED strip what LEDs to light up. Pretty simple right?</p>
 <p align="center">Where to begin...</p>
 <p align="left">To me it seems logical to start with the lowest level
 we're dealing with...hardware.</p>
-<p class="section-header" align="left">Arduino + LED strip: <a href="/addthislink">Schematic</a></p>
+<p align="left">Arduino + LED strip: <a href="/addthislink">Schematic</a></p>
 <ul>
 	<li><p align="left">The LED strip's driver chip must receive a
 	specially designed pulse to display colors.</p>
@@ -113,7 +113,7 @@ we're dealing with...hardware.</p>
 	the code for more info</a></p>
 </ul>
 <p align="left">Now for the backbone...</p>
-<p class="section-header">Raspberry Pi:</p>
+<p>Raspberry Pi:</p>
 <ul>
 	<li><p>Burn the ISO/install the OS to the SD</p>
 	<ul>
@@ -124,8 +124,8 @@ we're dealing with...hardware.</p>
 			<li><p>If you're on Windows you need an image burner program (I
 			would get ImgBurn from <a href="https://www.ninite.com/">here</a>)</p>
 			<li><p>If you're on Mac there should be one in the app store</p>
-			<li><p>If you're on Linux, I hope to God you know what you know
-			what to do already</p>
+			<li><p>If you're on Linux, I hope to God you know what to do
+			already</p>
 		</ul>
 		<li><p>Once that is done pop the card into the Pi, connect the
 		keyboard, ethernet, and display, then plug in the power cable</p>
@@ -157,22 +157,67 @@ we're dealing with...hardware.</p>
 			<li><p>Note: anything that looks <font face="FreeMono, monospace"><span style="background: transparent">like
 			this </span></font><font face="Liberation Serif, serif"><span style="background: transparent">is
 			meant to be commands that you should type character for character.</span></font></p>
-			<li><p>Login to the Pi using one of the above methods</p>
-			<li><p>First make sure we up-to-date: <font face="FreeMono, monospace">sudo
+			<li><p>Login to the Pi using one of the above methods.</p>
+			<li><p>First make sure we're up-to-date: <font face="FreeMono, monospace">sudo
 			apt-get update; sudo apt-get upgrade</font></p>
 			<li><p><font face="Liberation Serif, serif">Now install Apache,
-			PHP, and python serial package: <font face="FreeMono, monospace">sudo
+			PHP, and Python's serial package: <font face="FreeMono, monospace">sudo
 			apt-get install apache2 php5 python-serial</font></font></p>
 			<ul>
 				<li><p><font face="Liberation Serif, serif">Fire up a browser to
 				the RPi's IP address (found with <font face="FreeMono, monospace">hostname
-				-I</font>)<font face="FreeMono, monospace"> </font>and you should
-				Apache's default page.</font></p>
+				-I</font>) and you should Apache's default page.</font></p>
 			</ul>
-			<li><p><font face="Liberation Serif, serif">THERE WILL BE MORE
-			HERE</font></p>
+			<li><p><font face="Liberation Serif, serif">Now download all the
+			files from my repo: <font face="FreeMono, monospace">git clone
+			<a href="https://github.com/mynameistony/InternetLEDStrip.git">https://github.com/mynameistony/InternetLEDStrip.git</a></font></font></p>
+			<ul>
+				<li><p><font face="Liberation Serif, serif">This folder contains
+				everything you will need</font></p>
+				<ul>
+					<li><p><font face="Liberation Serif, serif">It has a folder
+					called 'Arduino' that contains the Arduino sketch and header
+					file</font></p>
+				</ul>
+			</ul>
+			<li><p><font face="Liberation Serif, serif">Now configure Apache
+			to serve that folder: <font face="FreeMono, monospace">sudo nano
+			/etc/apache2/apache2.conf</font></font></p>
+			<ul>
+				<li><p><font face="Liberation Serif, serif">Modify it to match
+				<a href="https://tonyrogers.ddns.net/stuff/apache-config.png">this
+				configuration</a></font></p>
+			</ul>
+			<li><p><font face="Liberation Serif, serif">Now restart the
+			server: <font face="FreeMono, monospace">sudo service apache2
+			restart</font></font></p>
+			<li><p><font face="Liberation Serif, serif">Now you must allow
+			access to the serial port (by default only root can read/write to
+			it)</font></p>
+			<ul>
+				<li><p><font face="FreeMono, monospace">sudo chmod 777
+				/dev/ttyAMA0</font></p>
+				<li><p><font face="Liberation Serif, serif">You should add that
+				line to /etc/rc.local so that it gets set on every boot</font></p>
+			</ul>
+			<li><p><font face="Liberation Serif, serif">We should also set up
+			the Pi with static IP so you can always find it</font></p>
+			<ul>
+				<li><p><font face="Liberation Serif, serif">First backup the
+				current configuration: <font face="FreeMono, monospace">sudo cp
+				/etc/network/interfaces ~/interfaces.backup </font>(just in case)</font></p>
+				<li><p><font face="Liberation Serif, serif">Now edit the
+				configuration: <font face="FreeMono, monospace">sudo nano
+				/etc/network/interfaces</font></font></p>
+				<li><p><font face="Liberation Serif, serif">You'll want to modify
+				the file to look <a href="https://tonyrogers.ddns.net/stuff/images/staticIP-config.png">like
+				this</a></font></p>
+			</ul>
+			<li><p><font face="Liberation Serif, serif">Now reboot and we
+			should be all set: <font face="FreeMono, monospace">sudo reboot</font></font></p>
 		</ul>
 	</ul>
+	<li><p></p>
 </ul>
 </body>
 </html>
