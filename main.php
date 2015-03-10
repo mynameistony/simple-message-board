@@ -17,6 +17,7 @@
 
 	<?php
 		echo shell_exec("bash scripts/print-uptime.sh");
+		echo shell_exec("bash scripts/send-strip.sh goooooooog");
 	?>
 	</center>
 </body>
