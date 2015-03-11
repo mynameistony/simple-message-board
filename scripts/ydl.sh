@@ -7,7 +7,7 @@ else
 
 	cd ydl/
 
-	youtube-dl --id -f 140 "https://www.youtube.com/watch?v=$video_code" && chmod 777 "$video_code.m4a"
+	youtube-dl --extract-audio -f 5 "https://www.youtube.com/watch?v=$video_code" && chmod 777 "$video_code.m4a"
 
 	if [ $? -eq 0 ]
 		then
