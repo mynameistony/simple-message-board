@@ -1,7 +1,7 @@
 <?php
 	require 'functions.php';
 
-	output_header("This is a test page", "This page is for testing");
+	output_header("Set the LED strip in my room!", "LED strip");
 
 	$colors = array("off","red", "green", "blue", "cyan", "magenta", "yellow", "white"); 
 
@@ -34,47 +34,78 @@
 
 	if(isset($_POST['off'])){
 		$toSend = "#000000#000000#000000#000000#000000#000000#000000#000000#000000#000000";
-		shell_exec("bash scripts/send-strip.sh $toSend");
+		shell_exec("bash scripts/send-strip.sh \"$toSend\"");
 	}
 	else
 	if(isset($_POST['on'])){
 		$toSend = "#ffffff#ffffff#ffffff#ffffff#ffffff#ffffff#ffffff#ffffff#ffffff#ffffff";
-		shell_exec("bash scripts/send-strip.sh $toSend");
+		shell_exec("bash scripts/send-strip.sh \"$toSend\"");
 	}
 	else
 	if(isset($_POST['rainbow'])){
 		$toSend = "#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000";
-		shell_exec("bash scripts/send-strip.sh $toSend");
+		shell_exec("bash scripts/send-strip.sh \"$toSend\"");
 	}
 	else
 	if(isset($_POST['send'])){
-		$toSend = "xxxxxxxxxx";
+		$toSend = "";
 
 		for($i = 0; $i < 10; $i++){
 			$color = $_POST["LED$i"];
-			$colorCode = substr($color, 0);
+			switch($color){
+				case "red":
+					$colorCode = "#ff0000";
+				break;
+                                case "green":
+                                        $colorCode = "#0000ff";
+                                break;
 
-			if($colorCode == 'o')
-				$colorCode = "x";
+                                case "blue":
+                                        $colorCode = "#00ff00";
+                                break;
 
-			$toSend[$i] = $colorCode;
+                                case "cyan":
+                                        $colorCode = "#000f0f";
+                                break;
+
+                                case "magenta":
+                                        $colorCode = "#0f0f00";
+                                break;
+
+                                case "yellow":
+                                        $colorCode = "#0f000f";
+                                break;
+                                case "white":
+                                        $colorCode = "#ffffff";
+                                break;
+                                case "off":
+                                        $colorCode = "#000000";
+                                break;
+                                default:
+                                        $colorCode = "#010101";
+                                break;
+			}
+			$toSend .= $colorCode;
 		}
 
-		shell_exec("bash scripts/send-strip.sh $toSend");	
-	}else
+		shell_exec("bash scripts/send-strip.sh \"$toSend\"");	
+	}
+	else
 	if(isset($_POST['custom-send'])){
+		$toSend = "";
 
 		for($i = 0; $i < 10; $i++){
 			$color = $_POST["customLED$i"];
 
-			if($color == "")
+			if($color == ""){
 				$color = "000000";
+			}
 
 			$color = "#$color";
 			$toSend .= "$color";
 		}
 
-		shell_exec("bash scripts/send-strip.sh $toSend");
+		shell_exec("bash scripts/send-strip.sh \"$toSend\"");
 
 	}
 	#echo "$toSend";

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo $@
+
 if [ $# -ne 1 ]
 then
 	echo -n "Fail"

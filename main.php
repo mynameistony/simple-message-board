@@ -3,7 +3,7 @@
 
 <body>
 	<center>
-		<h1>Welcome to my more interactive site!</h1>
+		<h1>Welcome to my website!</h1>
 		<p style="padding-bottom:40px">
 			<a href="/">Home page</a> |
 			<a href="/login.php">Login/Register</a> |
