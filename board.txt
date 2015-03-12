@@ -39,3 +39,8 @@
 <div class="username">Anonymous</div>
 <div class="post-content">gtest</div>
 </div>
+<div class="post">
+<div class="timestamp">Thursday, 03/12/15 at 04:29 PM</div>
+<div class="username">Anonymous</div>
+<div class="post-content">do the times work?</div>
+</div>

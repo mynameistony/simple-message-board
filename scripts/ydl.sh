@@ -7,7 +7,7 @@ else
 
 	cd ydl/
 
-	youtube-dl -f 5 "https://www.youtube.com/watch?v=$video_code" && chmod 777 "$video_code.flv"
+	youtube-dl -f 5 "https://www.youtube.com/watch?v=$video_code"
 
 	if [ $? -eq 0 ]
 		then

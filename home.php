@@ -16,6 +16,8 @@
 		}
 		echo "Todo: Add user abilities...";
 
+		output_footer();
+
 	}
 	else{
 		echo "<h2>That username/password combo is invalid, perhaps you should <a href=\"/login.php\">register</a> first</h2>";

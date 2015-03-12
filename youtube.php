@@ -10,6 +10,11 @@
 Search for a video in the lower box, then right click or long-press on the thumbnail, click Copy Link, then paste in the top box
  and click download.
 </p>
+<p>
+<b>Be very patient after clicking download</b>, my dinky ass server has to download the video first then try to convert it<br>
+<b>WAIT FOR THE PAGE TO LOAD AFTER CLICKING DOWNLOAD, DON'T TRY TO REFRESH TO MAKE IT GO FASTER BECAUSE IT WON'T</b>
+</p>
+
 <form action="/youtube.php" method="post">
 <input type="text" name="url" placeholder="Paste a youtube URL here">
 <input type="submit" value="Download" name="download">
