@@ -1,7 +1,9 @@
 <?php
 	echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/styles.css\">";
 	echo "<script src=\"/scripts.js\"></script>";
-
+	function output_footer(){
+		echo shell_exec("bash scripts/output-footer.sh");
+	}
 	function post_message($message){
 
 	}

@@ -16,8 +16,10 @@
         <div><a class="button" href="led.php">Set the LED strip in my room!</a></div><br><br>
 
 	<?php
-		echo shell_exec("bash scripts/print-uptime.sh");
-		shell_exec("bash scripts/send-strip.sh goooooooog");
+		require 'functions.php';
+		#echo shell_exec("bash scripts/print-uptime.sh");
+		#shell_exec("bash scripts/send-strip.sh goooooooog");
+		output_footer();
 	?>
 	</center>
 </body>
