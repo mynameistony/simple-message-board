@@ -1,5 +1,5 @@
 body{
-	background-color: grey;
+	background-color: lightgray;
 }
 
 .section-header{
@@ -8,8 +8,8 @@ body{
 
 .button{
 	padding: 20px;
-	color: blue;
-	background-color: green;
+	color: white;
+	background-color: grey;
 }
 .post{
 	width: 50%;

@@ -1,13 +1,9 @@
 <head>
-<link rel="stylesheet" type="text/css" href="/styles.css">
-<script src="/scripts.js"></script>
 </head>		
 <body>
 <center>
 <?php
 	require 'functions.php';
-
-	
 
 	$username = validate_user();
 
@@ -15,6 +11,9 @@
 
 		output_header("Welcome $username", "This is $username's home");
 
+		if($username == "tony"){
+			echo "Admin Controls:";
+		}
 		echo "Todo: Add user abilities...";
 
 	}

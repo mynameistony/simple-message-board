@@ -1,6 +1,4 @@
 <head>
-<link rel="stylesheet" type="text/css" href="/styles.css">
-<script src="/scripts.js"></script>
 <script src="/ytembed.js"></script>
 </head>
 <body>
