@@ -1,6 +1,0 @@
-#!/bin/bash
-echo "<p$(scripts/print-uptime.sh)"
-
-echo "$(date)"
-
-echo "<p>$(/usr/games/fortune)</p>"
