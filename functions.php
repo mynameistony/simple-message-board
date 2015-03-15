@@ -12,25 +12,17 @@
 
 	}
 
-	function validate_user(){
-		if (isset($_POST['login'])){
-			if(isset($_POST['username-login'])){
-				if(isset($_POST['password-login'])){
+	function validate_user($username,$password){
+		$status = shell_exec("bash scripts/validate-user.sh $username $password");
 
-					$user = $_POST['username-login'];
-					$pass = $_POST['password-login'];
+		if($status == "Ok"){
+			$_SERVER['PHP_AUTH_USER'] = $username;
+			$_SERVER['PHP_AUTH_PW'] = $password;
+			return "$user";
 
-					$status = shell_exec("bash scripts/validate-user.sh $user $pass");
-
-					if($status == "Ok")
-						return "$user";
-					else
-						return "Fail";
-
-
-				}
-			}
-		}	
+		}
+		else
+			return "Fail";
 	}
 
 	function create_user($newName,$newPass){
@@ -41,7 +33,6 @@
 			case "Ok":
 				echo "<p>Welcome, $newName.<br>Your password is: $newPass</p>";
 				break;
-			
 			case "Taken":
 				echo "<p>Oops, that name is taken already, try another.</p>";
 				break;
@@ -50,14 +41,27 @@
 				echo "<p>Uh-oh, something went wrong, try again.</p>";
 				break;
 		}
-			
 	}
 
 	function output_board(){
 		echo shell_exec("bash scripts/output-board.sh");
 	}
 
-	function output_header($title,$heading){
+	function require_login(){
+		if(!isset($_SERVER['PHP_AUTH_USER'])){
+			header('WWW-Authenticate: Basic realm="Login"');
+			header('HTTP/1.0 401 Unauthorized');
+			unset($_SERVER['PHP_AUTH_USER']);
+			unset($_SERVER['PHP_AUTH_PW']);
+			output_header("You have to login to view this page", "You're not allow to be here");
+		}
+	}
+
+	function output_header($title,$heading,$auth){
+
+		if($auth == "Yes"){
+			require_login();
+		}
 
 		echo "<title id=\"title\">$title</title>";
 		echo "<div class=\"header\" id=\"header\">";

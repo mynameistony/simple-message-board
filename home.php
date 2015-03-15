@@ -5,23 +5,43 @@
 <?php
 	require 'functions.php';
 
-	$username = validate_user();
+	if(isset($_POST['username-login'])){
 
-	if($username != "Fail"){
+		if(isset($_POST['password-login'])){
+			$username = $_POST['username-login'];
+			$password = $_POST['password-login'];
 
-		output_header("Welcome $username", "This is $username's home");
+			$status = validate_user($username, $password);
 
-		if($username == "tony"){
-			echo "Admin Controls:";
+			if($status == "Fail"){
+				output_header("You have to login!","You're not allowed in here!");
+				exit;
+			}
+			else{
+				output_header("Welcome $username!","This is $username's home");
+			}
 		}
-		echo "Todo: Add user abilities...";
-
-		output_footer();
-
 	}
 	else{
-		echo "<h2>That username/password combo is invalid, perhaps you should <a href=\"/login.php\">register</a> first</h2>";
+
+		require_login();
+
+		$username = $_SERVER['PHP_AUTH_USER'];
+		$password = $_SERVER['PHP_AUTH_PW'];
+
+		$status = validate_user($username,$password);
+
+		if($status == "Fail"){
+			output_header("You have to login!","You're not allowed in here!");
+			unset($_SERVER['PHP_AUTH_USER']);
+			unset($_SERVER['PHP_AUTH_PW']);
+                        exit;
+		}
+		else{
+			output_header("Welcome $username!","This is $username's home");
+		}
 	}
+
 ?>
 </center>
 </body>
