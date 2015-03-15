@@ -7,21 +7,24 @@
 			$recipient = $_POST['user-selector'];
 			$message = $_POST['message-text'];
 
-			echo shell_exec("bash scripts/send-message.sh $username $recipient \"$message\"");
+			echo shell_exec("bash scripts/send-message.sh \"$username\" \"$recipient\" \"$message\"");
 			echo "Sending '$message' to $recipient";
 		}
 
 		if(isset($_POST['post-submitted'])){
 			$post = $_POST['post-text'];
 
-			#echo shell_exec("bash scripts/post.sh $user $post");
-			echo "Posting '$post'";
+			$status = shell_exec("bash scripts/post.sh \"$username\" \"$post\"");
+
+			if($status != "Ok")
+				echo "Uh-oh. Something went wrong";
+			else
+				echo "Posting '$post'";
 		}
 
 		if(isset($_POST['message-selected'])){
 			$friend = $_POST['friend-selector'];
-
-			echo shell_exec("bash scripts/print-messages.sh $username $friend");
+			echo shell_exec("bash scripts/print-messages.sh \"$username\" \"$friend\"");
 		}
 	}
 
@@ -52,6 +55,7 @@
 				
 				case 'Feed':
 					echo "This will be your feed of other users activity";
+					echo shell_exec("bash scripts/output-user-feed.sh");
 					#View all users feed
 
 					break;
@@ -70,6 +74,8 @@
 		}
 		else{
 			echo "This is your home page...";
+			echo shell_exec("bash scripts/output-user-feed.sh $user");
+
 		}
 	}
 
@@ -135,9 +141,13 @@
 		if(!isset($_SERVER['PHP_AUTH_USER'])){
 			header('WWW-Authenticate: Basic realm="Login"');
 			header('HTTP/1.0 401 Unauthorized');
+
 			unset($_SERVER['PHP_AUTH_USER']);
 			unset($_SERVER['PHP_AUTH_PW']);
-			output_header("You have to login to view this page", "You're not allow to be here");
+			output_header("You have to login to view this page", "What are you doing here");
+
+			exit;
+
 		}
 	}
 
