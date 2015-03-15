@@ -7,7 +7,7 @@
 			$recipient = $_POST['user-selector'];
 			$message = $_POST['message-text'];
 
-			#echo shell_exec("bash scripts/send-message.sh $username $recipient \"$message\"")
+			echo shell_exec("bash scripts/send-message.sh $username $recipient \"$message\"");
 			echo "Sending '$message' to $recipient";
 		}
 
@@ -16,6 +16,12 @@
 
 			#echo shell_exec("bash scripts/post.sh $user $post");
 			echo "Posting '$post'";
+		}
+
+		if(isset($_POST['message-selected'])){
+			$friend = $_POST['friend-selector'];
+
+			echo shell_exec("bash scripts/print-messages.sh $username $friend");
 		}
 	}
 
@@ -38,8 +44,8 @@
 
 			switch ($currentFeed) {
 				case "Messages":
-					echo "Messages will be here";
-					#echo shell_exec("bash scripts/output-message-list.sh $user");
+					echo "View messages from:";
+					echo shell_exec("bash scripts/output-message-list.sh $user");
 					#View Messages
 					
 					break;
