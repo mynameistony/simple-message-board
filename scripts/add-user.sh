@@ -6,11 +6,16 @@ if [ $# -ne 2 ]
 	exit 1
 else
 
-	taken=$(cat .htpasswd | grep "^$1" | wc -l)
+	taken=$(cat ../users/.htpasswd | grep "^$1" | wc -l)
 
 	if [ $taken == "0" ]
 		then
-		echo "$1:$2" >> .htpasswd
+		echo "$1:$2" >> ../users/.htpasswd
+
+		mkdir -p ../users/$1/messages/
+
+		touch ../users/$1/profile
+
 		echo -n "Ok"
 		exit 0
 	else

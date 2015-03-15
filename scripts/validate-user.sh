@@ -5,7 +5,7 @@ if [ $# -ne 2 ]
 
 else
 
-	check=$(cat .htpasswd | grep "^$1:$2" | wc -l)
+	check=$(cat ../users/.htpasswd | grep "^$1:$2" | wc -l)
 
 	if [ $check -eq "1" ]
 		then
