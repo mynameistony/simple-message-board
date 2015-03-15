@@ -11,12 +11,17 @@
 	check_register();
 
 ?>
+
+<!--
 <form action="home.php" method="post">
 <input type="text" name="username-login" placeholder="Username">
 <input type="password" name="password-login" placeholder="Password">
 <input type="submit" name="login" value="Login">
 </form>
+-->
 
+<p><a href="/home.php">Login</a></p>
+or
 <form id="register-form" action="login.php" method="post">
 <input onchange="validateUsername()" id="username" type="text" name="username-register" placeholder="New Username">
 <input onchange="validatePassword()" id="password" type="password" name="password-register" placeholder="New Password">

@@ -1,9 +1,87 @@
 <?php
 	echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/styles.css\">";
 	echo "<script src=\"/scripts.js\"></script>";
+
+	function check_user_forms($username){
+		if(isset($_POST['message-submitted'])){
+			$recipient = $_POST['user-selector'];
+			$message = $_POST['message-text'];
+
+			#echo shell_exec("bash scripts/send-message.sh $username $recipient \"$message\"")
+			echo "Sending '$message' to $recipient";
+		}
+
+		if(isset($_POST['post-submitted'])){
+			$post = $_POST['post-text'];
+
+			#echo shell_exec("bash scripts/post.sh $user $post");
+			echo "Posting '$post'";
+		}
+	}
+
+	function output_message_form($user){
+		echo "<div class=\"message-form\">";
+		echo "<form id=\"message\" action=\"home.php\" method=\"post\">";
+		echo "<input type=\"text\" name=\"message-text\" placeholder=\"Send a message to:\">";
+
+		echo shell_exec("bash scripts/output-user-selector.sh $user");
+
+		echo "<input type=\"submit\" name=\"message-submitted\" value=\"Send\">";
+
+		echo "</div>";
+	}
+
+	function output_current_feed($user){
+
+		if(isset($_POST['feed-selected'])){
+			$currentFeed = $_POST['feed-selector'];
+
+			switch ($currentFeed) {
+				case "Messages":
+					echo "Messages will be here";
+					#echo shell_exec("bash scripts/output-message-list.sh $user");
+					#View Messages
+					
+					break;
+				
+				case 'Feed':
+					echo "This will be your feed of other users activity";
+					#View all users feed
+
+					break;
+				
+				case 'Photos':
+					echo "This will be other users uploaded photos...shit I still have to add uploads";
+					# View photo feed
+					break;
+				
+				default:
+					# In Case shit breaks
+					echo "Shits broke yo...";
+					break;
+			}
+
+		}
+		else{
+			echo "This is your home page...";
+		}
+	}
+
+	function output_feed_selector(){
+		echo "<form id=\"feed-selector-form\" action=\"home.php\" method=\"post\">";
+		echo "<select name=\"feed-selector\" id=\"feed-selector\">";
+		echo "<option value=\"Feed\">Feed</option>";
+		echo "<option value=\"Photos\">Photos</option>";
+		echo "<option value=\"Messages\">Messages</option>";
+		echo "</select>";
+		echo "<input type=\"submit\" name=\"feed-selected\" value=\"Go\"></input>";
+		echo "</form>";
+	}
+
 	function output_footer(){
 		echo shell_exec("bash scripts/output-footer.sh");
 	}
+
 	function post_message($message){
 
 	}
@@ -18,7 +96,7 @@
 		if($status == "Ok"){
 			$_SERVER['PHP_AUTH_USER'] = $username;
 			$_SERVER['PHP_AUTH_PW'] = $password;
-			return "$user";
+			return "$username";
 
 		}
 		else
@@ -59,7 +137,7 @@
 
 	function output_header($title,$heading,$auth){
 
-		if($auth == "Yes"){
+		if(isset($auth)){
 			require_login();
 		}
 
@@ -126,10 +204,9 @@
 
 	function output_post_form(){
 		echo "<div id=\"post-form\" class=\"post-form\">";
-		echo "<form id=\"post\" action=\"board.php\" method=\"post\">";
+		echo "<form id=\"post\" action=\"home.php\" method=\"post\">";
 		echo "<input type=\"text\" name=\"post-text\" placeholder=\"Post\">";
-		echo "<input type=\"text\" name=\"post-username\" placeholder=\"Name (Optional)\">";
-		echo "<input type=\"submit\" value=\"Post\" name=\"submitted\">";
+		echo "<input type=\"submit\" value=\"Post\" name=\"post-submitted\">";
 		echo "</form>";
 		echo "</div>";
 	}
