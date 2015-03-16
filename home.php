@@ -23,9 +23,9 @@
 	else{
 		output_header("Welcome $username!","This is $username's home");
 
-		if(username == "tony"){
-			#check_admin_controls();
-			#output_admin_controls();
+		if($username == "tony"){
+			check_admin_controls();
+			output_admin_controls();
 		}
 
 		check_user_forms($username);

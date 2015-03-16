@@ -14,7 +14,7 @@ else
 
 		mkdir -p ../users/$1/messages/
 
-		touch ../users/$1/profile
+		touch ../users/$1/feed
 
 		echo -n "Ok"
 		exit 0

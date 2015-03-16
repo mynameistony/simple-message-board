@@ -2,13 +2,44 @@
 	echo "<link rel=\"stylesheet\" type=\"text/css\" href=\"/styles.css\">";
 	echo "<script src=\"/scripts.js\"></script>";
 
+	function check_admin_controls(){
+		if(isset($_POST['admin-control-submitted'])){
+			$action = $_POST['admin-control-selector'];
+
+			switch($action){
+				case "clear-users":
+					echo "Clearing users";
+					shell_exec("bash scripts/clear-users.sh");
+				break;
+
+				case "view-log":
+					echo "Viewing log...";
+					echo shell_exec("bash scripts/output-access-log.sh");
+				break;
+			}
+		}
+
+	}
+
+	function output_admin_controls(){
+		echo "<p>";
+		echo "<form action=\"home.php\" method=\"post\">";
+		echo "<select name=\"admin-control-selector\">";
+		echo "<option value=\"nothing\">Pick an option:</option>";
+		echo "<option value=\"clear-users\">Clear Users</option>";
+		echo "<option value=\"view-log\">View Access Log</option>";
+		echo "</form> ";
+		echo "<input type=\"submit\" name=\"admin-control-submitted\" value=\"Submit\">";
+		echo "</p>";
+	}
+
 	function check_user_forms($username){
 		if(isset($_POST['message-submitted'])){
 			$recipient = $_POST['user-selector'];
 			$message = $_POST['message-text'];
 
 			echo shell_exec("bash scripts/send-message.sh \"$username\" \"$recipient\" \"$message\"");
-			echo "Sending '$message' to $recipient";
+			echo "<p>Sending '$message' to $recipient</p>";
 		}
 
 		if(isset($_POST['post-submitted'])){
@@ -19,7 +50,7 @@
 			if($status != "Ok")
 				echo "Uh-oh. Something went wrong";
 			else
-				echo "Posting '$post'";
+				echo "<p>Posting '$post'</p>";
 		}
 
 		if(isset($_POST['message-selected'])){
@@ -54,7 +85,7 @@
 					break;
 				
 				case 'Feed':
-					echo "This will be your feed of other users activity";
+					#echo "This will be your feed of other users activity";
 					echo shell_exec("bash scripts/output-user-feed.sh");
 					#View all users feed
 
@@ -73,7 +104,7 @@
 
 		}
 		else{
-			echo "This is your home page...";
+			#echo "This is your home page...";
 			echo shell_exec("bash scripts/output-user-feed.sh $user");
 
 		}
@@ -221,7 +252,7 @@
 	function output_post_form(){
 		echo "<div id=\"post-form\" class=\"post-form\">";
 		echo "<form id=\"post\" action=\"home.php\" method=\"post\">";
-		echo "<input type=\"text\" name=\"post-text\" placeholder=\"Post\">";
+		echo "<input type=\"text\" name=\"post-text\" placeholder=\"Post to the public feed\">";
 		echo "<input type=\"submit\" value=\"Post\" name=\"post-submitted\">";
 		echo "</form>";
 		echo "</div>";
