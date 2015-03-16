@@ -28,8 +28,8 @@
 		echo "<option value=\"nothing\">Pick an option:</option>";
 		echo "<option value=\"clear-users\">Clear Users</option>";
 		echo "<option value=\"view-log\">View Access Log</option>";
-		echo "</form> ";
 		echo "<input type=\"submit\" name=\"admin-control-submitted\" value=\"Submit\">";
+		echo "</form> ";
 		echo "</p>";
 	}
 
