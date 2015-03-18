@@ -46,7 +46,7 @@
 	}
 	else
 	if(isset($_POST['rainbow'])){
-		$toSend = "#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000#ff0000";
+		$toSend = "M2";
 		shell_exec("bash scripts/send-strip.sh \"$toSend\"");
 	}
 	else
