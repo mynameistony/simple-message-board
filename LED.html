@@ -38,6 +38,10 @@ webpage. On the page there is a form that when submitted, causes the
 server to execute a program that sends data about what LEDs to light
 up to the Arduino. The Arduino then interprets the data and tells the
 LED strip what LEDs to light up. Pretty simple right?</p>
+<p><a href="http://imgur.com/a/UH4pJ">Photos of the setup</a><br>
+<a href="https://www.youtube.com/watch?v=KT3OVM-OiSw">Basic Demo</a><br>
+<a href="https://www.youtube.com/watch?v=5zwvm3iLXGI">Rainbow Mode Demo</a><br>
+
 <p class="section-header">Parts:</p>
 <ul>
 	<li><p>1x → Raspberry Pi + SD card (at least 8GB) + power cable</p>
@@ -111,17 +115,15 @@ we're dealing with...hardware.</p>
 	<li><p align="left">The Arduino listens on the serial wire for a
 	string of characters coming from RPi, if it receives one, it
 	interprets them and sets the strip accordingly.</p>
-	<li><p align="left"><a href="https://github.com/mynameistony/simple-message-board/tree/master/stuff/Arduino">Check
-	the code for more info</a></p>
+	<li><p align="left">Get the main sketch <a href="/LEDstripFiles/SerialLEDstrip.ino">here</a> and the accompanying library <a href="/LEDstripFiles/stuff.h">here</a></p>
 	<li><p align="left">Download the Arduino IDE <a href="http://www.arduino.cc/en/Main/Software">from
 	here</a></p>
-	<li><p align="left">Paste the contents 'SerialLEDstrip.ino' into the
-	window</p>
-	<li><p align="left">Click the little towards the top right and
-	select Create New Tab</p>
+	<li><p align="left">Paste the contents 'SerialLEDstrip.ino' into a new sketch</p>
+	<li><p align="left">Click the little arrow towards the top right and
+	select "Create New Tab"</p>
 	<ul>
-		<li><p align="left">Name it 'stuff.h' and paste in the contents of
-		stuff.h</p>
+		<li><p align="left">Name it 'stuff.h' and paste the contents of
+		stuff.h into it</p>
 	</ul>
 	<li><p align="left">Click upload and hopefully it works :P</p>
 </ul>
@@ -159,6 +161,7 @@ we're dealing with...hardware.</p>
 				<li><p>Go back and select Finish then reboot.</p>
 			</ul>
 		</ul>
+
 		<li><p>Now you can either:</p>
 		<ul>
 			<li><p>Configure the Pi using a keyboard and tv.</p>
@@ -179,27 +182,50 @@ we're dealing with...hardware.</p>
 			<ul>
 				<li><p><font face="Liberation Serif, serif">Fire up a browser to
 				the RPi's IP address (found with <font face="FreeMono, monospace">hostname
-				-I</font>) and you should Apache's default page.</font></p>
+				-I</font>) and you should see Apache's default page.</font></p>
 			</ul>
 			<li><p><font face="Liberation Serif, serif">Now download all the
-			files from my repo: </font><font face="FreeMono, monospace">git
-			clone <a href="https://github.com/mynameistony/InternetLEDStrip.git">https://github.com/mynameistony/InternetLEDStrip.git</a></font></p>
+			neccessary files:</p>
 			<ul>
-				<li><p><font face="Liberation Serif, serif">This folder contains
-				everything you will need</font></p>
-				<ul>
-					<li><p><font face="Liberation Serif, serif">It has a folder
-					called 'Arduino' that contains the Arduino sketch and header
-					file</font></p>
-				</ul>
+			<li>
+			<p>
+				<a href="/LEDstripFiles/led.php">led.php</a> -> This is the main webpage
+			</p>
 			</ul>
+
+
+			<ul>
+			<li>
+			<p><a href="/LEDstripFiles/send-strip.sh">send-strip.sh</a> -> This is the middle man between the webpage and the python script to send data over the serial line</p>
+			</ul>
+
+			<ul>
+			<li>
+			<p><a href="/LEDstripFiles/send-serial.py">send-serial.py</a> -> This is the script that actually sends the data to the Arduino</p>
+			</ul>
+
+			<ul>
+			
+			<li>
+			<p>Put those files into a folder called "website" in the pi users home folder</p>
+			</ul>
+			
+
 			<li><p><font face="Liberation Serif, serif">Now configure Apache
 			to serve that folder: <font face="FreeMono, monospace">sudo nano
 			/etc/apache2/apache2.conf</font></font></p>
 			<ul>
-				<li><p><font face="Liberation Serif, serif">Modify it to match
-				<a href="https://tonyrogers.ddns.net/stuff/apache-config.png">this
-				configuration</a></font></p>
+				<li><p>
+					Find the line that says "ServerRoot ..." and make it point to the folder that contains all our files
+
+				</p>
+				<li><p>
+					You will also need configure it to redirect the homepage to "led.php" instead of the default "index.html"
+				</p>				
+				<li><p>
+					Add the following line: <font face="FreeMono, monospace">Alias / /led.php</font><br>
+					This will redirect the homepage of our server to led.php
+				</p>				
 			</ul>
 			<li><p><font face="Liberation Serif, serif">Now restart the
 			server: <font face="FreeMono, monospace">sudo service apache2
@@ -231,8 +257,11 @@ we're dealing with...hardware.</p>
 			reboot</font></p>
 		</ul>
 	</ul>
-	<li><p><font face="Liberation Serif, serif">Now connect the Rpi,
-	Arduino and LED strip as shown <a href="http://tonyrogers.ddns.net/addthislink">here</a></font></p>
+	
+	<li><p>Now to connect everything together:</p>
+	<ul>
+	<li><p><a href="http://imgur.com/a/UH4pJ">Here are some photos</a></p>
+	</ul>
 </ul>
 <p><br><br>
 </p>
