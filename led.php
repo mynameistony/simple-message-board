@@ -31,7 +31,10 @@
 
 
 	
-
+	if(isset($_POST['pulse'])){
+		$toSend = "M1". $_POST['pulse-color'];
+		shell_exec("bash scripts/send-strip.sh \"$toSend\"");
+	}
 	if(isset($_POST['off'])){
 		$toSend = "#000000#000000#000000#000000#000000#000000#000000#000000#000000#000000";
 		shell_exec("bash scripts/send-strip.sh \"$toSend\"");
@@ -111,5 +114,18 @@
 	#echo "$toSend";
 
 ?>
+
+<p>
+Pulse Color
+<br>
+<form action="led.php" method="post">
+<select name="pulse-color">
+	<option value="ff">Green</option>
+	<option value="ff00">Blue</option>
+	<option value="ff0000">Red</option>
+</select>
+<input name="pulse" type="submit" value="Go">
+</form>
+</p>
 <br><br>
 <p><div><a class="button" href="LED.html">Find out more!</a></div></p>
